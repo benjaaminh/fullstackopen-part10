@@ -1,20 +1,26 @@
 import { StyleSheet, View } from 'react-native';
+import { Route, Routes, Navigate } from 'react-router-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
+import SignIn from './SignIn';
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     flexShrink: 1,
-    backgroundColor: "grey"
+    backgroundColor: "lightgrey"
   },
 });
 
 const Main = () => {
   return (
     <View style={styles.container}>
-      <AppBar/>
-      <RepositoryList/>
+      <AppBar />
+      <Routes>
+        <Route path="/" element={<RepositoryList />} />
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="*" element={<Navigate to="/" replace />} /> {/* any route that is not / will redirect to / */}
+      </Routes>
     </View>
   );
 };
