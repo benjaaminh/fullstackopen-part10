@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
         backgroundColor: "#24292e",
-        paddingBottom: 10,
-        paddingLeft: 10
+        paddingBottom: 5,
+        paddingLeft: 5
         // ...
     },
     text: {

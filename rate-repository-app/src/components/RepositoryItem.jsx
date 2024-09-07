@@ -82,8 +82,8 @@ const RepositoryItem = ({ item }) => {
             <View style={styles.bottomContainer}>
                 <Statistics text="Stars" number={item.stargazersCount}/>
                 <Statistics text="Forks" number={item.forksCount}/>
-                <Statistics text="Stars" number={item.reviewCount}/>
-                <Statistics text="Stars" number={item.ratingAverage}/>
+                <Statistics text="Reviews" number={item.reviewCount}/>
+                <Statistics text="Rating" number={item.ratingAverage}/>
             </View>
         </View>
     )
