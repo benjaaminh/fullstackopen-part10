@@ -7,20 +7,25 @@ import { useQuery } from "@apollo/client";
 import { GET_REPOSITORY } from "../graphql/queries";
 
 
-const RepositoryItem = ({  item,singleView }) => {
-    const id = useParams();
-    const navigate = useNavigate();
+const SingleView = ({  singleView }) => {
+    const id = useParams(); //useparams returns undefined?
+    const { data, loading } = useQuery(GET_REPOSITORY, { // get data from the query
+        fetchPolicy: 'cache-and-network', // prevent getting cached data with the repository query
+        variables: { id }
+    });
+    if (loading) {
+        return <Text>Loading...</Text>;
+      }
+    console.log(id)
+    const item = data?.repository;
+    /* const navigate = useNavigate();
     const data = useQuery(GET_REPOSITORY, {
         variables: {id},
         fetchPolicy: "cache-and-network"
     });
     console.log(data);
-    const onPress = () => {
-        console.log("elo")
-        navigate(`/repository/${item.id}`)
-    }
+    item=data?.repository; */
     return (
-        <Pressable onPress={onPress}>
             <View testID="repositoryItem">
                 <View style={styles.topContainer}>
                     <Image style={styles.image} source={{ uri: item.ownerAvatarUrl }} />
@@ -43,7 +48,7 @@ const RepositoryItem = ({  item,singleView }) => {
                 )
                 }
             </View>
-        </Pressable>)
+        )
 }
 
 const styles = StyleSheet.create({
@@ -109,4 +114,4 @@ const Statistics = ({ text, number }) => {
     )
 }
 
-export default RepositoryItem
+export default SingleView

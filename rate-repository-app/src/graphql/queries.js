@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { useParams } from 'react-router-native';
 
 export const GET_REPOSITORIES = gql`
   query {
@@ -27,6 +28,22 @@ query {
   }
 }
 
+`;
+
+export const GET_REPOSITORY = gql`
+query Repository($id: ID!) {
+  repository(id: $id) {
+    description
+    fullName
+    forksCount
+    language
+    id
+    stargazersCount
+    ownerAvatarUrl
+    reviewCount
+    ratingAverage
+  }
+}
 `;
 
 // other queries...
