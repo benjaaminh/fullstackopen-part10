@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet, Pressable, Linking } from "react-native"
+import { View, Image, StyleSheet, Pressable, Linking, FlatList } from "react-native"
 import theme from "../theme";
 import Text from "./Text";
 const styles = StyleSheet.create({
@@ -64,12 +64,7 @@ const Statistics = ({ text, number }) => {
     )
 }
 
-const Repository = ({ item, singleView }) => {
-
-    const onPress = (url) => {
-        Linking.openURL(url)
-    }
-
+const Repository = ({ item }) => {
     return (
         <View>
             <View style={styles.topContainer}>
@@ -88,13 +83,6 @@ const Repository = ({ item, singleView }) => {
                 <Statistics text="Reviews" number={item.reviewCount} />
                 <Statistics text="Rating" number={item.ratingAverage} />
             </View>
-            {singleView && (
-            <View style={{backgroundColor:"white"}}>
-                <Pressable style={theme.button} onPress={() => onPress(item.url)}>
-                <Text style={{ color: "white" }}>Open in github</Text>
-                </Pressable>
-                </View>
-            )}
         </View>
     )
 }

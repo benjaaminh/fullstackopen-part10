@@ -44,8 +44,44 @@ query Repository($id: ID!) {
     reviewCount
     ratingAverage
     url
+    reviews {
+      edges {
+        node {
+          id
+          text
+          rating
+          createdAt
+          user {
+            id
+            username
+          }
+        }
+      }
+    }
   }
 }
 `;
+
+export const GET_REVIEWS = gql`
+query Review($id: ID!) {
+  repository(id: $id) {
+    id
+    fullName
+    reviews {
+      edges {
+        node {
+          id
+          text
+          rating
+          createdAt
+          user {
+            id
+            username
+          }
+        }
+      }
+    }
+  }
+}`;
 
 // other queries...

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const RepositoryListContainer = ({repositories, onPress}) => {
+export const RepositoryListContainer = ({repositories}) => {
   const repositoryNodes = repositories && repositories.edges //maps the array of edges and retrieves each node
     ? repositories.edges.map(edge => edge.node)
     : [];
@@ -18,7 +18,7 @@ export const RepositoryListContainer = ({repositories, onPress}) => {
       <FlatList
         data={repositoryNodes}
         ItemSeparatorComponent={ItemSeparator}
-        renderItem={({item})=><RepositoryItem item={item} singleView={false}/>}
+        renderItem={({item})=><RepositoryItem item={item}/>}
       // other props
       />
     );
