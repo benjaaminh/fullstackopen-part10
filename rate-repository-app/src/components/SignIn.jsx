@@ -13,14 +13,6 @@ const styles = StyleSheet.create({
         flexShrink: 1,
         backgroundColor: "lightgrey"
     },
-    button: {
-        backgroundColor: theme.colors.primary,
-        alignItems: "center",
-        justifyContent: "center",
-        paddingVertical: 6,
-        margin: 10,
-        borderRadius: 6
-    },
     errorText: {
         color: "#d73a4a",
         marginLeft: 10
@@ -70,7 +62,7 @@ export const SignInForm = ({ onSubmit }) => {
                 {formik.touched.password && formik.errors.password && (
                     <Text style={styles.errorText}>{formik.errors.password}</Text>
                 )}
-                <Pressable style={styles.button} onPress={formik.handleSubmit}>
+                <Pressable style={theme.button} onPress={formik.handleSubmit}>
                     <Text style={{ color: "white" }}>Sign in</Text>
                 </Pressable>
             </View>

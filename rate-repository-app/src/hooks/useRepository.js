@@ -10,7 +10,6 @@ const useRepository = (repositoryId) => {
   });
 
   const repository = data?.repository;
-console.log(repository)
   return {
     repository,
     loading,

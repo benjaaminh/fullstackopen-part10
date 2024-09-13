@@ -1,5 +1,6 @@
 import { screen, render, within } from "@testing-library/react-native";
 import { RepositoryListContainer } from "../../components/RepositoryList";
+import { MemoryRouter } from "react-router-native";
 describe('RepositoryList', () => {
     describe('RepositoryListContainer', () => {
       it('renders repository information correctly', () => {
@@ -46,8 +47,11 @@ describe('RepositoryList', () => {
           ],
         };
   
-        // Add your test code here
-        render(<RepositoryListContainer repositories={repositories}/>);
+        // will need router for test, since repository is using usenavigate
+        render(<MemoryRouter>
+        <RepositoryListContainer repositories={repositories}/>
+        </MemoryRouter>
+      );
         screen.debug();
         
         const repositoryItems = screen.getAllByTestId('repositoryItem');

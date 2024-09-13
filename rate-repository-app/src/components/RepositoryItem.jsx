@@ -1,112 +1,17 @@
-import { View, Image, StyleSheet, Pressable } from "react-native"
-import theme from "../theme";
-import Text from "./Text";
-import { useNavigate, useParams } from "react-router-native";
-import useRepository from "../hooks/useRepository";
-import { useQuery } from "@apollo/client";
-import { GET_REPOSITORY } from "../graphql/queries";
-
-
-const RepositoryItem = ({  item,singleView }) => {
-    const id = useParams();
+import { View, Pressable } from "react-native"
+import { useNavigate } from "react-router-native";
+import Repository from "./Repository";
+const RepositoryItem = ({  item }) => {
     const navigate = useNavigate();
-    const data = useQuery(GET_REPOSITORY, {
-        variables: {id},
-        fetchPolicy: "cache-and-network"
-    });
-    console.log(data);
     const onPress = () => {
-        console.log("elo")
         navigate(`/repository/${item.id}`)
     }
     return (
         <Pressable onPress={onPress}>
             <View testID="repositoryItem">
-                <View style={styles.topContainer}>
-                    <Image style={styles.image} source={{ uri: item.ownerAvatarUrl }} />
-                    <View style={styles.infoContainer}>
-                        <Text style={styles.headingText}>{item.fullName}</Text>
-                        <Text style={styles.descriptionText}>{item.description}</Text>
-                        <View style={styles.languageContainer}>
-                            <Text style={styles.languagetext}>{item.language}</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.bottomContainer}>
-                    <Statistics text="Stars" number={item.stargazersCount} />
-                    <Statistics text="Forks" number={item.forksCount} />
-                    <Statistics text="Reviews" number={item.reviewCount} />
-                    <Statistics text="Rating" number={item.ratingAverage} />
-                </View>
-                {singleView && (
-                    <Text>tes</Text>
-                )
-                }
+                <Repository item={item}/>
             </View>
         </Pressable>)
-}
-
-const styles = StyleSheet.create({
-    topContainer: {
-        backgroundColor: "white",
-        flexDirection: "row",
-    },
-    infoContainer: {
-        flexGrow: 0,
-        paddingTop: 5,
-        paddingLeft: 10,
-        flexShrink: 1
-    },
-    bottomContainer: {
-        flexDirection: "row",
-        justifyContent: "center",
-        backgroundColor: "white",
-        paddingBottom: 5
-    },
-    statsContainer: {
-        flexGrow: 1,
-        paddingTop: 5,
-        paddingLeft: 15
-    },
-    languagetext: {
-        color: "white",
-        backgroundColor: theme.colors.primary,
-        flexShrink: 1,
-        padding: 5,
-        borderRadius: 10
-    },
-    headingText: {
-        fontWeight: "bold"
-    },
-    image: {
-        width: 50,
-        height: 50,
-        margin: 10,
-        borderRadius: 10
-    },
-    languageContainer: {
-        flexDirection: "row"
-    },
-    descriptionText: {
-        paddingBottom: 5,
-    }
-    // ...
-});
-
-const roundNumber = (number) => {
-    if (number > 1000) {
-        return (number / 1000).toFixed(1) + "k";
-    }
-    return number;
-}
-
-const Statistics = ({ text, number }) => {
-    return (
-        <View style={styles.statsContainer}>
-            <Text style={styles.headingText}>{roundNumber(number)}</Text>
-            <Text>{text}</Text>
-        </View>
-    )
 }
 
 export default RepositoryItem

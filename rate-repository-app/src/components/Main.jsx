@@ -5,7 +5,8 @@ import AppBar from './AppBar';
 import SignIn from './SignIn';
 import theme from '../theme';
 import RepositoryItem from './RepositoryItem';
-import SingleView from './SingleView';
+import SingleView from './SingleViewRepository';
+import SingleViewRepository from './SingleViewRepository';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +24,7 @@ const Main = () => {
       <Routes>
         <Route path="/" element={<RepositoryList />} />
         <Route path="/signIn" element={<SignIn />} />
-        <Route path="/repository/:id" element={<SingleView singleView={true}/>}/>
+        <Route path="/repository/:id" element={<SingleViewRepository/>}/>
         <Route path="*" element={<Navigate to="/" replace />} /> {/* any route that is not / will redirect to / */}
       </Routes>
     </View>
