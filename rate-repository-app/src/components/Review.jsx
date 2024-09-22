@@ -97,7 +97,7 @@ export const ReviewForm = ({ onSubmit }) => {
 };
 
 const Review = () => {
-    const {createReview} = useCreateReview();
+    const {createReview} = useCreateReview(); //was returned as an object, so we use it as an object
 
     const navigate = useNavigate();
 

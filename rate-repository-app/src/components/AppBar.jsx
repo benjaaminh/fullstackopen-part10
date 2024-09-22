@@ -45,22 +45,30 @@ const AppBar = () => {
                     </Pressable>
                     {user ? (
                         <>
-                        <Pressable>
-                            <Link to="/review">
-                            <Text style={styles.text}>Create a Review</Text>
-                            </Link>
-                        </Pressable>
-                        <Pressable onPress={onSignout}>
+                            <Pressable>
+                                <Link to="/review">
+                                    <Text style={styles.text}>Create a Review</Text>
+                                </Link>
+                            </Pressable>
+                            <Pressable onPress={onSignout}>
                                 <Text style={styles.text}>Sign out</Text>
-                        </Pressable>
+                            </Pressable>
                         </>
                     )
-                        :
-                        <Pressable>
-                            <Link to="/signIn">
-                                <Text style={styles.text}>Sign in</Text>
-                            </Link>
-                        </Pressable>}
+                        : (
+                            <>
+                                <Pressable>
+                                    <Link to="/signIn">
+                                        <Text style={styles.text}>Sign in</Text>
+                                    </Link>
+                                </Pressable>
+                                <Pressable>
+                                <Link to="/signUp">
+                                    <Text style={styles.text}>Sign up</Text>
+                                </Link>
+                            </Pressable>
+                            </>
+                        )}
                 </ScrollView>
             </View>
         </View>
