@@ -1,24 +1,31 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_REPOSITORIES } from '../graphql/queries';
-const useRepositories = (sortBy) => {
-    let vars ={};
+import { useDebounce } from 'use-debounce';
+const useRepositories = (sortBy, searchKeyword) => {
+    let vars = {};
 
     switch (sortBy) {
         case 'latest':
-             vars = {"orderBy":'CREATED_AT', "orderDirection": 'DESC' }
-             break
+            vars = { "orderBy": 'CREATED_AT', "orderDirection": 'DESC' }
+            break
         case 'highest':
-             vars = {"orderBy":'RATING_AVERAGE', "orderDirection": 'DESC' }
-             break
+            vars = { "orderBy": 'RATING_AVERAGE', "orderDirection": 'DESC' }
+            break
         case 'lowest':
-             vars = {"orderBy":'RATING_AVERAGE', "orderDirection": 'ASC' }
-             break
+            vars = { "orderBy": 'RATING_AVERAGE', "orderDirection": 'ASC' }
+            break
+    }
+    if (searchKeyword) {
+        vars = {
+            ...vars,
+            "searchKeyword": searchKeyword
+        }
     }
 
     const { data, error, loading } = useQuery(GET_REPOSITORIES, {
         fetchPolicy: 'cache-and-network',
-        variables: vars
+        variables: vars,
     });
     const [repositories, setRepositories] = useState();
 
