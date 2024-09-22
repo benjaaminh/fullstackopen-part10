@@ -7,3 +7,11 @@ export const LOGIN = gql`
     }
   }
 `
+//review will give repositoryid and take review object as input
+export const CREATE_REVIEW = gql`
+  mutation CreateReview($review: CreateReviewInput!) { 
+    createReview(review: $review) {
+      repositoryId
+    }
+  }
+`

@@ -7,7 +7,8 @@ import theme from '../theme';
 import RepositoryItem from './RepositoryItem';
 import SingleView from './SingleViewRepository';
 import SingleViewRepository from './SingleViewRepository';
-
+import ReviewForm from './Review';
+import Review from './Review';
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -23,6 +24,7 @@ const Main = () => {
       <AppBar />
       <Routes>
         <Route path="/" element={<RepositoryList />} />
+        <Route path="/review" element={<Review/>}/>
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/repository/:id" element={<SingleViewRepository/>}/>
         <Route path="*" element={<Navigate to="/" replace />} /> {/* any route that is not / will redirect to / */}

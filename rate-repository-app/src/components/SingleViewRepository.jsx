@@ -4,13 +4,59 @@ import { useNavigate, useParams } from "react-router-native";
 import { useQuery } from "@apollo/client";
 import { GET_REPOSITORY } from "../graphql/queries";
 import Repository from "./Repository";
-import { View, Pressable, FlatList } from "react-native";
+import { View, Pressable, FlatList, StyleSheet } from "react-native";
+import {format } from "date-fns"
+const RepositoryInfo = ({ repository }) => {
 
-const ReviewItem = ( {review} ) => {
-    console.log(review.id+"idsda")
+    const onPress = (url) => {
+        Linking.openURL(url)
+    }
+    return (
+        <View style={{ backgroundColor: "white" }}>
+            <Repository item={repository} />
+            <Pressable style={theme.button} onPress={() => onPress(repository.url)}>
+                <Text style={{ color: "white" }}>Open in github</Text>
+            </Pressable>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "white",
+        flexDirection: "row",
+    },
+    rating: {
+        flexShrink:0, //keep circle same size
+        width: 45,
+        height: 45,
+        borderColor: theme.colors.primary,
+        borderRadius: 45 / 2,
+        borderWidth: 2,
+        margin: 5,
+        textAlign: "center",
+        color: theme.colors.primary,
+        paddingTop: 12, //put rating to middle of circle
+        fontWeight: "bold"
+    },
+    infoContainer: {
+        flexShrink: 1, //text goes down at border of screen
+        paddingTop: 5,
+        paddingLeft: 10,
+    }
+});
+
+const ReviewItem = ({ review }) => {
     return (
         <View>
-            <Text>{review.id}</Text>
+            <View style={styles.container}>
+                <Text style={styles.rating}>{review.rating}</Text>
+                <View style={styles.infoContainer}>{/*  separate container to get them on top of eachother */}
+                    <Text style={{ fontWeight: "bold" }}>{review.user.username}</Text>
+                    <Text style={{marginBottom:2, color: "grey"}}>{format(new Date(review.createdAt), "dd.MM.yyyy")}</Text>
+                    <Text>{review.text}</Text>
+                </View>
+            </View>
         </View>
     )
 }
@@ -24,31 +70,27 @@ const SingleViewRepository = () => {
     if (loading) {
         return <Text>Loading...</Text>;
     }
-    const item = data?.repository;
+    const repository = data?.repository;
 
-    const reviewNodes = item.reviews  //maps the array of edges and retrieves each node
-        ? item.reviews.edges.map(edge => edge.node)
+    const reviewNodes = repository.reviews  //maps the array of edges and retrieves each node
+        ? repository.reviews.edges.map(edge => edge.node)
         : [];
-    console.log(reviewNodes);
-    console.log(reviewNodes[0].id)
-    const onPress = (url) => {
-        Linking.openURL(url)
-    }
+
+    const ItemSeparator = () => <View style={{ height: 10 }} />;
 
     return (
         <View>
-            <Repository item={item} singleView={true} />
-            <View style={{ backgroundColor: "white" }}>
-                <Pressable style={theme.button} onPress={() => onPress(item.url)}>
-                    <Text style={{ color: "white" }}>Open in github</Text>
-                </Pressable>
-                <FlatList
-                    data={reviewNodes}
-                    renderItem={({ item }) => <ReviewItem review={item} />}
-                    keyExtractor={({ id }) => id}
-/*                     ListHeaderComponent={() => <Repository item={item} />}
- */                />
-            </View>
+            <FlatList
+                data={reviewNodes}
+                renderItem={({ item }) => <ReviewItem review={item} />}
+                keyExtractor={({ id }) => id}
+                ItemSeparatorComponent={ItemSeparator}
+                ListHeaderComponent={() => (
+                    <View>
+                        <RepositoryInfo repository={repository} />
+                        <View style={{ height: 10, backgroundColor: 'lightgrey' }} />
+                    </View>)}
+            />
         </View>
     )
 }
