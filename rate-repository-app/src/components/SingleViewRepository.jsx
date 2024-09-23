@@ -46,13 +46,14 @@ const styles = StyleSheet.create({
     }
 });
 
-const ReviewItem = ({ review }) => {
+export const ReviewItem = ({ review, listView, fullName }) => {
     return (
         <View>
             <View style={styles.container}>
                 <Text style={styles.rating}>{review.rating}</Text>
                 <View style={styles.infoContainer}>{/*  separate container to get them on top of eachother */}
-                    <Text style={{ fontWeight: "bold" }}>{review.user.username}</Text>
+                    {listView ? <Text style={{ fontWeight: "bold" }}>{fullName}</Text> :
+                    <Text style={{ fontWeight: "bold" }}>{review.user.username}</Text>}
                     <Text style={{marginBottom:2, color: "grey"}}>{format(new Date(review.createdAt), "dd.MM.yyyy")}</Text>
                     <Text>{review.text}</Text>
                 </View>
@@ -71,7 +72,6 @@ const SingleViewRepository = () => {
         return <Text>Loading...</Text>;
     }
     const repository = data?.repository;
-
     const reviewNodes = repository.reviews  //maps the array of edges and retrieves each node
         ? repository.reviews.edges.map(edge => edge.node)
         : [];

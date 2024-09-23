@@ -10,6 +10,7 @@ import SingleViewRepository from './SingleViewRepository';
 import ReviewForm from './Review';
 import Review from './Review';
 import SignUp from './SignUp';
+import ReviewList from './ReviewList';
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -26,6 +27,7 @@ const Main = () => {
       <Routes>
         <Route path="/" element={<RepositoryList />} />
         <Route path="/review" element={<Review/>}/>
+        <Route path="/reviews" element={<ReviewList />} />
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/repository/:id" element={<SingleViewRepository/>}/>
