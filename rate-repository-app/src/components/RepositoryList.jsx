@@ -1,7 +1,6 @@
-import { FlatList, View, StyleSheet, Pressable } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
-import { useNavigate } from 'react-router-native';
 import {Picker} from "@react-native-picker/picker"
 import { useState } from 'react';
 import { Searchbar } from 'react-native-paper'

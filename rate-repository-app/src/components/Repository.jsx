@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet, Pressable, Linking, FlatList } from "react-native"
+import { View, Image, StyleSheet } from "react-native"
 import theme from "../theme";
 import Text from "./Text";
 const styles = StyleSheet.create({

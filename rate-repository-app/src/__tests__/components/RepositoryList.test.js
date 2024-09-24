@@ -1,4 +1,4 @@
-import { screen, render, within } from "@testing-library/react-native";
+import { screen, render } from "@testing-library/react-native";
 import { RepositoryListContainer } from "../../components/RepositoryList";
 import { MemoryRouter } from "react-router-native";
 describe('RepositoryList', () => {

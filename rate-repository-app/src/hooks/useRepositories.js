@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_REPOSITORIES } from '../graphql/queries';
-import { useDebounce } from 'use-debounce';
 const useRepositories = (sortBy, searchKeyword) => {
     let vars = {};
 

@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client';
-import { useParams } from 'react-router-native';
 
 export const GET_REPOSITORIES = gql`
   query($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection, $searchKeyword: String) {

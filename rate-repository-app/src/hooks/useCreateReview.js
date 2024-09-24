@@ -1,5 +1,5 @@
 import { CREATE_REVIEW } from "../graphql/mutations";
-import { useApolloClient, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 
 const useCreateReview = () => {
     const [mutate] = useMutation(CREATE_REVIEW);

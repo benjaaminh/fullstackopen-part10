@@ -1,10 +1,10 @@
 import theme from "../theme";
 import Text from "./Text";
-import { useNavigate, useParams } from "react-router-native";
+import { useParams } from "react-router-native";
 import { useQuery } from "@apollo/client";
 import { GET_REPOSITORY } from "../graphql/queries";
 import Repository from "./Repository";
-import { View, Pressable, FlatList, StyleSheet } from "react-native";
+import { View, Pressable, FlatList, StyleSheet, Linking } from "react-native";
 import {format } from "date-fns"
 const RepositoryInfo = ({ repository }) => {
 

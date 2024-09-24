@@ -1,12 +1,10 @@
 import { View, StyleSheet, Pressable, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
-import { Link, useNavigate } from 'react-router-native';
+import { Link } from 'react-router-native';
 import Text from './Text';
 import { useQuery } from '@apollo/client';
 import { ME } from '../graphql/queries';
 import useSignOut from '../hooks/useSignOut';
-import { useApolloClient } from "@apollo/client";
-import useAuthStorage from '../hooks/useAuthStorage';
 
 const styles = StyleSheet.create({
     container: {

@@ -1,6 +1,5 @@
-import { CREATE_USER, LOGIN } from "../graphql/mutations";
-import { useApolloClient, useMutation } from "@apollo/client";
-import useAuthStorage from "./useAuthStorage";
+import { CREATE_USER } from "../graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 const useSignUp = () => {
     const [mutate] = useMutation(CREATE_USER);
