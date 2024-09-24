@@ -29,6 +29,10 @@ query getCurrentUser($includeReviews: Boolean = false){
     reviews @include(if: $includeReviews) {
       edges {
         node {
+          repository {
+            fullName
+            url
+          }
           id
           text
           rating
