@@ -33,7 +33,6 @@ const ReviewList = () => {
     const [ deleteReview ] = useDeleteReview();
 
     const handleDeletePress = (id) => {
-
         Alert.alert(
             "Delete review",
             "Are you sure you want to delete this review?",
